@@ -1,0 +1,21 @@
+.item {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  font-size: 2rem;
+  padding: 1rem;
+}
+.left {
+  flex: 2;
+  font-weight: 800;
+}
+
+.right {
+  flex: 1;
+  text-align: right;
+  display: flex;
+}
+
+.btn {
+  margin-left: 0.5rem;
+}
