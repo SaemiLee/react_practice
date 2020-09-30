@@ -1,19 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { userData } from "../../db";
-import SquareLayout from "../component/SquareLayout";
+import SquareLayout from "./SquareLayout";
+import store from "../state/store";
+import { setData } from "../state/action";
 
 export default function Board() {
   // functional component
-  const [users, setUsers] = useState([]);
+  // const [users, setUsers] = useState([]);
 
   useEffect(function () {
-    setUsers(userData);
+    // setUsers(userData);
+    store.dispatch(setData(userData));
   }, []);
 
   return (
     <>
       <h1 style={{ textAlign: "center" }}>Score Board</h1>
-      <SquareLayout users={users} />
+      {/* <SquareLayout users={users} /> */}
+      <SquareLayout />
     </>
   );
 }

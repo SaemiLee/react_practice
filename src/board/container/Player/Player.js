@@ -1,7 +1,9 @@
 // @ts-nocheck
 import React, { useState } from "react";
-import Button from "../Button";
+import Button from "../../component/Button";
 import style from "./Player.module.css";
+import store from "../../state/store";
+import { decrease, increase } from "../../state/action";
 
 /**
  *
@@ -17,16 +19,19 @@ export default function Player({ id, name, score: initial, updatePlayer }) {
   const increaseHandler = () => {
     console.log("increase:", id, score + 1);
     setScore(score + 1);
-    updatePlayer(id, score + 1);
+    // updatePlayer(id, score + 1);
+    store.dispatch(increase(id, score));
   };
 
   const decreaseHandler = () => {
     console.log("decrease:", id, score - 1);
     if (score > 0) {
       setScore(score - 1);
-      updatePlayer(id, score - 1);
+      //updatePlayer(id, score - 1);
+      store.dispatch(decrease(id, score));
     }
   };
+  console.log("store:", store.getState());
   return (
     <div className={style.item} data-id={id}>
       <div className={style.left}>{name}</div>
