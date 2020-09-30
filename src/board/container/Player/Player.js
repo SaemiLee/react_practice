@@ -15,13 +15,13 @@ export default function Player({ id, name, score: initial, updatePlayer }) {
   const [score, setScore] = useState(initial);
 
   const increaseHandler = () => {
-    console.log("increase");
+    console.log("increase:", id, score + 1);
     setScore(score + 1);
     updatePlayer(id, score + 1);
   };
 
   const decreaseHandler = () => {
-    console.log("decrease");
+    console.log("decrease:", id, score - 1);
     if (score > 0) {
       setScore(score - 1);
       updatePlayer(id, score - 1);
