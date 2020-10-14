@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react";
-import produce from "immer";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { userData } from "../../../db";
+import { setUsers } from "../../state";
+// import produce from "immer";
 import Player from "../Player";
 
 import "./SquareLayout.css";
-import store from "../../state/store";
-import { setData } from "../../state/action";
+// import store from "../../../common/store";
+// import { setData } from "../../state/action";
 
 // /**
 //  *
@@ -12,7 +15,20 @@ import { setData } from "../../state/action";
 //  * @param {array} param.users
 //  */
 export default function SquareLayout() {
-  const [users, setUsers] = useState([]);
+  // const [users, setUsers] = useState([]);
+
+  const dispatch = useDispatch();
+
+  const users = useSelector((state) => state.user.users);
+
+ 
+  useEffect(
+    function () {
+      // setUsers(userData);
+      dispatch(setUsers(userData));
+    },
+    [dispatch]
+  );
 
   // useEffect(() => {
   //   setUsers(initUsers);
@@ -45,11 +61,13 @@ export default function SquareLayout() {
   //   return b.score - a.score;
   // });
   // console.log(sortedUsers);
-  console.log(store.getState());
-  const unsubscribe = store.subscribe(setData);
+  // console.log(store.getState());
+  // const unsubscribe = store.subscribe(setData);
+  let sortedUser = [...users];
+  sortedUser.sort((a, b) => b.score - a.score);
   return (
     <div className="board-container">
-      {[].map((user) => (
+      {sortedUser.map((user) => (
         // <Player key={user.id} name={user.name} score={user.score} />
         <Player key={user.id} {...user} />
       ))}

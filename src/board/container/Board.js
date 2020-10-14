@@ -1,17 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { userData } from "../../db";
+// import React, { useState, useEffect } from "react";
+import React from "react";
+// import { userData } from "../../db";
 import SquareLayout from "./SquareLayout";
-import store from "../state/store";
-import { setData } from "../state/action";
+// import store from "../../common/store";
+// import { setData } from "../state/action";
 
 export default function Board() {
   // functional component
   // const [users, setUsers] = useState([]);
-
-  useEffect(function () {
-    // setUsers(userData);
-    store.dispatch(setData(userData));
-  }, []);
 
   return (
     <>
