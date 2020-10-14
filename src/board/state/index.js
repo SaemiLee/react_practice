@@ -1,12 +1,13 @@
+import axios from 'axios';
 import createReducer from "../../common/createReducer";
 
 const INITIAL_STATE = {
   users: [],
 };
 
-const INCREASE = "users/increase";
-const DECREASE = "users/decrease";
-const SETUSERS = "users/setUsers";
+const INCREASE = "board/increase";
+const DECREASE = "board/decrease";
+const SETUSERS = "board/setUsers";
 
 export const increase = (id, score) => ({
   type: INCREASE,
@@ -15,6 +16,10 @@ export const increase = (id, score) => ({
     score,
   },
 });
+
+export const asyncDecrease = (id, score) => dispatch => {
+  setTimeout(() => dispatch(increase(id, score)), 4000)
+}
 
 export const decrease = (id, score) => ({
   type: DECREASE,

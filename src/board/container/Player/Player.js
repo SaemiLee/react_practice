@@ -29,7 +29,10 @@ export default function Player({ id, name, score }) {
     if (score > 0) {
       // setScore(score - 1);
       //updatePlayer(id, score - 1);
-      dispatch(decrease(id, score));
+      setTimeout(() => {
+        dispatch(decrease(id, score));
+      }, 10000)
+      
     }
   };
   return (
