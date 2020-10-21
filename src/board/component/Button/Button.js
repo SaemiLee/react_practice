@@ -16,5 +16,6 @@ export default function Button({ title, big, clickHandler }) {
     >
       {title}
     </button>
+    
   );
 }

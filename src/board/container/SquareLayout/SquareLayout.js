@@ -19,7 +19,7 @@ export default function SquareLayout() {
 
   const dispatch = useDispatch();
 
-  const users = useSelector((state) => state.user.users);
+  const users = useSelector((state) => state.board.users);
 
  
   useEffect(

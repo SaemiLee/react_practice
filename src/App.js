@@ -1,11 +1,11 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { Redirect, Route, Switch } from "react-router-dom";
 import Board from "./board/container/Board";
 import Login from './user/container/Login';
 
 function App() {
-  const [isLoggedIn, setLogin] = useState(false);
-
+  const { login } = useSelector(state => state.user);
   const publicRouter = () => (
     <>
       <Route exact path="/login" component={Login} />
@@ -21,7 +21,7 @@ function App() {
   )
 
   return <Switch>
-      {isLoggedIn ? privateRouter() : publicRouter()}
+      {login ? privateRouter() : publicRouter()}
     </Switch>
 }
 

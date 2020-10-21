@@ -1,6 +1,7 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from 'redux-thunk'
-import userReducer from "../board/state";
+import boardReducer from "../board/state";
+import userReducer from '../user/state';
 
 // const myMiddleware = store => next => action => {
 //   console.log(`prev state : ${JSON.stringify(store.getState())}`);
@@ -10,8 +11,8 @@ import userReducer from "../board/state";
 // }
 
 const reducer = combineReducers({
+  board: boardReducer,
   user: userReducer,
-  // login: loginReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
