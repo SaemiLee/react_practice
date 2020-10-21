@@ -2,8 +2,7 @@ import axios from 'axios';
 import createReducer from "../../common/createReducer";
 
 const INITIAL_STATE = {
-  isLoading: false,
-  login: null,
+  login: false,
 };
 
 const SUCCESS = "user/success";
@@ -24,24 +23,31 @@ export const loading = () => ({
 
 export const login = () => dispatch => {
   dispatch(loading());
-  // axios.get('http://localhost:5000/login').then(dispatch(success())).catch(dispatch(failure()))
-  setTimeout(() => {
-    dispatch(success())
-  }, 5000)
+  const userAxios = axios.create({
+      baseURL: 'http://localhost:5000/account',
+      withCredentials: true
+    })
+  userAxios.post('/login', { email: 'test@test.com', password: 'test' })
+    .then((res) => {
+      console.log(res.data.data)
+      if (res.data.data.token) {
+        localStorage.setItem('token', res.data.data.token);
+        setTimeout(() => { dispatch(success()) }, 2000);
+      } else {
+        dispatch(failure());
+      }
+    }).catch(dispatch(failure()))
 }
   
 
 export default createReducer(INITIAL_STATE, {
   [SUCCESS]: (state, action) => {
-    state.isLoading = false;
     state.login = true;
   },
   [FAILURE]: (state, action) => {
-    state.isLoading = false;
     state.login = false;
   },
   [LOADING]: (state, action) => {
-    state.isLoading = true;
     state.login = null;
   }
 });

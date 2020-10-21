@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Redirect, Route, Switch } from "react-router-dom";
 import Board from "./board/container/Board";
+import Loader from "./user/component/Loader";
 import Login from './user/container/Login';
 
 function App() {
-  const { login } = useSelector(state => state.user);
+  const { login, isLoading } = useSelector(state => state.user);
   const publicRouter = () => (
     <>
       <Route exact path="/login" component={Login} />
@@ -21,7 +22,12 @@ function App() {
   )
 
   return <Switch>
-      {login ? privateRouter() : publicRouter()}
+    {
+      login === null && <Loader />
+    }
+    {
+      login === true ? privateRouter() : publicRouter()
+    }
     </Switch>
 }
 
